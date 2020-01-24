@@ -29,6 +29,7 @@ class MovieListVC: UIViewController {
     func setupViews() {
         
         self.title = "Favorites"
+        self.view.backgroundColor = .white
         
         let addButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewMovie))
         self.navigationItem.rightBarButtonItem = addButton
@@ -41,9 +42,11 @@ class MovieListVC: UIViewController {
     }
     
     @objc func addNewMovie() {
+    
         let vc = AddMovieVC()
+        let nav = UINavigationController(rootViewController:vc)
         vc.delegate = self
-        self.present(vc, animated: true, completion: nil)
+        self.present(nav, animated: true, completion: nil)
     }
 }
 
@@ -63,6 +66,17 @@ extension MovieListVC: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if (editingStyle == .delete) {
+            self.movies.remove(at: indexPath.row)
+            self.tableView.reloadData()
+        }
+    }
 }
 
 // MARK: - MovieDelegate
@@ -70,6 +84,7 @@ extension MovieListVC: UITableViewDelegate, UITableViewDataSource {
 extension MovieListVC: MovieDelegate {
     
     func newMovieAdded(_ movie: Movie) {
+        print("NEW: ", movie)
         self.movies.append(movie)
         self.tableView.reloadData()
     }
