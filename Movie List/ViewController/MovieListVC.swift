@@ -10,7 +10,7 @@ import UIKit
 
 class MovieListVC: UIViewController {
 
-    // MARK: - Properties
+    // MARK: - UI Elements
     
     var tableView: UITableView!
     var movies = [Movie]()
@@ -84,7 +84,6 @@ extension MovieListVC: UITableViewDelegate, UITableViewDataSource {
 extension MovieListVC: MovieDelegate {
     
     func newMovieAdded(_ movie: Movie) {
-        print("NEW: ", movie)
         self.movies.append(movie)
         self.tableView.reloadData()
     }

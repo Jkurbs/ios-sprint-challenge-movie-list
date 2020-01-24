@@ -7,10 +7,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
          /// Setup initial ViewController
-        
-        
-        print("FINISH")
-        
          let initialViewController = MovieListVC()
          let navigationController = UINavigationController(rootViewController: initialViewController)
          self.window?.rootViewController = navigationController
